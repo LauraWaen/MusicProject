@@ -4,8 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
@@ -15,19 +17,21 @@ public class Music {
 	 public Long musicId;
 	 public String Artist;
 	 public String Song;
-	 public String Genre;
 	 public int Year;
 	 
-	
+	 @ManyToOne
+	   @JsonIgnoreProperties ("musics") 
+	   @JoinColumn(name = "genreId")
+	   private Genre genre;
 	 
 	 public Music() {}
 	 
-	 public Music(String Artist, String Song, String Genre, int Year) {
+	 public Music(String Artist, String Song, int Year, Genre genre) {
 		 super();
 		 this.Artist = Artist;
 		 this.Song = Song;
-		 this.Genre = Genre;
 		 this.Year = Year;
+		 this.genre = genre;
 	}
 	public Long getId() {
 		return musicId;
@@ -52,14 +56,6 @@ public class Music {
 	public void setSong(String song) {
 		Song = song;
 	}
-
-	public String getGenre() {
-		return Genre;
-	}
-
-	public void setGenre(String genre) {
-		this.Genre = genre;
-	}
 	
 	public int getYear() {
 		return Year;
@@ -68,11 +64,23 @@ public class Music {
 	public void setYear(int year) {
 		Year = year;
 	}
+	
 	 
+	public Genre getGenre() {
+		return genre;
+	}
+
+	public void setGenre(Genre genre) {
+		this.genre = genre;
+	}
+
 	@Override
 	public String toString() {
-		return "Music [musicId=" + musicId + ", Artist=" + Artist + ", Song=" + Song + ", Genre=" + Genre + ", Year=" + Year +"]";
-
+		if (this.genre != null)
+		return "Music [musicId=" + musicId + ", Artist=" + Artist + ", Song=" + Song + ", Year=" + Year + "Genre=" + this.getGenre() + "]";
+		else 
+			return "Music [musicId=" + musicId + ", Artist=" + Artist + ", Song=" + Song + ", Year=" + Year + "]";
+			
 	 
 	 
 	 

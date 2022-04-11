@@ -18,7 +18,7 @@ public class Genre {
 		public String name;
 		
 		
-		@OneToMany(cascade = CascadeType.ALL, mappedBy = "Genre")
+		@OneToMany(cascade = CascadeType.ALL, mappedBy = "genre")
 		private List<Music> musics;
 		
 		public Genre() {}

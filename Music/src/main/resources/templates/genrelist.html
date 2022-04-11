@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Genrelist</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+</head>
+<body>
+<h1>Genrelist</h1>
+<table>
+ 
+    	<tr th:each = "genre : ${genres}">	
+    		<td th:text="${genre.name}"></td>	  		
+    </tr>
+</table>
+	 <a href="/addgenre">Add Genre</a> 
+
+
+</body>
+</html>

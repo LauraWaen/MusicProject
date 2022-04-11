@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Musics</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />   
+<title>Edit Music</title>
  <style>
  
-h2 {
+h1 {
 font-size: 60px;
 text-align: center;
 font-family: Palace Script MT;
@@ -21,25 +21,24 @@ text-align: center;
 display: inline-block;
 font-size: 16px;
 }
-
-.add {
+.edit {
 text-align: center;
 font-size: 18px;
 }
+
 .input {
 border: 100px;
 padding: 20px;
 }
 
  </style>
- 
 </head>
 <body>
-<h2>Add Music</h2>
+<h1>Edit Music</h1>
 
-<div class="add">
-
-		<form th:object="${music}" th:action="@{/save}" action="#" method="post">
+<div class="edit">
+	<form th:object="${music}" th:action="@{/save}" action="edit" method="post">
+	
 		  	<label for="Artist">Artist</label>
 			<input type="text" id="Artist" th:field="*{Artist}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
@@ -62,11 +61,8 @@ padding: 20px;
 
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<button type="submit" value="Save">Save</button>
-
-
-
-</form>
-
-</div>
+	
+			</form>
+			</div>
 </body>
 </html>

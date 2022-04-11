@@ -4,46 +4,90 @@
     <title>MusicList</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />   
  <style>
- table, td, th {  
-  border: 1px solid #ddd;
-  text-align: left;
+ 
+ h1 {
+font-size: 55px;
+text-align: center;
+font-family:  Palace Script MT;
+
+}
+ td, th {  
+ 
+  text-align: center;
+   border-bottom: 1px solid #ddd;
+ 
 }
 table {
   border-collapse: collapse;
+  width:80%;
+  
 }
-th, td {
-  padding: 10px;
-}
+th {
+  padding: 8px 70px;
+   background-color: hotpink;
+  color: white;
+   font-size: 18px;
+}  
+
 button {
-	background-color: #008CBA;
+  background-color: hotpink;
   border: none;
   color: white;
-  margin-top: 10px;
-  padding: 10px 15px;
+  margin-top: 8px;
+  padding: 8px 10px;
   text-align: center;
   display: inline-block;
-  font-size: 16px;	
+  font-size: 16px;
+  
+ 	
 }
+
+div {
+text-align: center;
+}
+
+.add {
+text-align: center;
+font-size: 60px;
+
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
  </style>
 </head>
 <body>
-	<h1>MusicList</h1>
-	<table>
+
+	<h1>Music List</h1>
+
+
+<div>
+	<table class="center">
 		<tr>
 			<th>Artist</th>
 			<th>Song</th>
-			<th>Genre</th>
 			<th>Year</th>
+			<th>Genre</th>
+			<th sec:authorize="hasAuthority('ADMIN')"></th>
 		</tr>
 
 		<tr th:each="music : ${musics}">
-			<td th:text="${music.Artist}">Artist: </td>
-			<td th:text="${music.Song}">Song: </td>
-			<td th:text="${music.Genre}">Genre: </td>
-			<td th:text="${music.Year}">Year: </td>
+			<td th:text="${music.Artist}"></td>
+			<td th:text="${music.Song}"></td>
+			<td th:text="${music.Year}"></td>
+			<td th:text="${music.Genre.name}"></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletemusic/{id}(id=${music.id})}" class="btn btn-xs btn-danger"><button>Delete</button></a></td>
+			<td><a th:href="@{/edit/{id}(id=${music.id})}" class="btn btn-xs btn-danger"><button>Edit</button></a></td>
 		</tr>
 		
 	</table>
-	<a href="/addmusic"><button>Add new music</button></a>
+	</div>
+	<div class="add">
+	<a href="/addmusic" class="btn btn-primary"><button>Add new music</button></a>
+	</div>
+	
 </body>
 </html>
