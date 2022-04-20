@@ -1,5 +1,8 @@
 package MusicProject.Music;
 
+
+
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -12,16 +15,20 @@ import MusicProject.Music.domain.Genre;
 import MusicProject.Music.domain.GenreRepository;
 import MusicProject.Music.domain.Music;
 import MusicProject.Music.domain.MusicRepository;
+import MusicProject.Music.domain.User;
 import MusicProject.Music.domain.UserRepository;
+
 
 
 @SpringBootApplication
 public class MusicApplication {
+
 	private static final Logger log = LoggerFactory.getLogger(MusicApplication.class);
 	
 	public static void main(String[] args) {
 		SpringApplication.run(MusicApplication.class, args);
 	}
+
 	
 	@Bean
 	public CommandLineRunner musicDemo(MusicRepository mrepository, GenreRepository grepository, UserRepository urepository) {
@@ -51,13 +58,19 @@ public class MusicApplication {
 			Genre genre10 = new Genre("Country");
 			grepository.save(genre10);
 			
-			mrepository.save(new Music("Abreu", "20 Ave Mariaa", 2020, genre1));
-			mrepository.save(new Music("JVG", "Tarkenee", 2017, genre1));
+			mrepository.save(new Music("Abreu", "Lusikat", 2020, genre1));
+			mrepository.save(new Music("JVG", "Tarkenee", 2015, genre1));
+			mrepository.save(new Music("Maluma", "Sobrio", 2021, genre6));
 		
+			User user1 = new User("user", "$2a$10$0yJX1Q2lCUhE/M88XhuD4OSeCa56h9kFDAJwB3Fa9G7URUKeBxo4O", "USER");
+			User user2 = new User("admin", "$2a$10$PsDS6BrGjXGh.diU9aQXeeX6pk5GbPpXT0ogZcTvEcdPGg.ByYVou", "ADMIN");
+			urepository.save(user1);
+			urepository.save(user2);
 			
 			log.info("Get Music");
 			for (Music music : mrepository.findAll()) {
 				log.info(music.toString());
+				
 			}
 		};
 	}

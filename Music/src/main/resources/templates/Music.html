@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <title>MusicList</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />   
@@ -19,8 +19,8 @@ font-family:  Palace Script MT;
 }
 table {
   border-collapse: collapse;
-  width:80%;
-  
+ 
+
 }
 th {
   padding: 8px 70px;
@@ -41,7 +41,6 @@ button {
   
  	
 }
-
 div {
 text-align: center;
 }
@@ -49,7 +48,6 @@ text-align: center;
 .add {
 text-align: center;
 font-size: 60px;
-
 }
 
 .center {
@@ -57,12 +55,38 @@ font-size: 60px;
   margin-right: auto;
 }
 
+.search {
+ background-color: hotpink;
+ border: none;
+ color: white;
+ margin-top: 8px;
+ padding: 8px 10px;
+ display: inline-block;
+ font-size: 16px;
+ margin-left: 450px;
+}
+.Greeting {
+font-family: Chamberi Super Display;
+}
+
  </style>
 </head>
 <body>
-
+	
 	<h1>Music List</h1>
-
+	
+	<div class="Greeting">
+		<h3 th:inline="text">Welcome to the Music List [[${#httpServletRequest.remoteUser}]]!</h3>
+	</div>
+	
+	<div class="search">
+		<form th:action="@{/musiclist}">
+    	 <input type="text" name="keyword" id="keyword" size="40" th:value="${keyword}" required />
+    		&nbsp;
+    		<input type="submit" value="Search" />
+    		&nbsp;
+		</form>
+</div>
 
 <div>
 	<table class="center">
@@ -75,18 +99,23 @@ font-size: 60px;
 		</tr>
 
 		<tr th:each="music : ${musics}">
-			<td th:text="${music.Artist}"></td>
-			<td th:text="${music.Song}"></td>
-			<td th:text="${music.Year}"></td>
+			<td th:text="${music.artist}"></td>
+			<td th:text="${music.song}"></td>
+			<td th:text="${music.year}"></td>
 			<td th:text="${music.Genre.name}"></td>
-			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletemusic/{id}(id=${music.id})}" class="btn btn-xs btn-danger"><button>Delete</button></a></td>
-			<td><a th:href="@{/edit/{id}(id=${music.id})}" class="btn btn-xs btn-danger"><button>Edit</button></a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletemusic/{id}(id=${music.musicId})}" class="btn btn-xs btn-danger"><button>Delete</button></a></td>
+			<td><a th:href="@{/edit/{id}(id=${music.musicId})}" class="btn btn-xs btn-danger"><button>Edit</button></a></td>
 		</tr>
 		
 	</table>
 	</div>
 	<div class="add">
-	<a href="/addmusic" class="btn btn-primary"><button>Add new music</button></a>
+	<a href="/addmusic" class="btn btn-primary"><button>Add music</button></a>
+	</div>
+	<div class="Out" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
 	</div>
 	
 </body>

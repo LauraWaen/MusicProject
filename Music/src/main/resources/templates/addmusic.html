@@ -41,7 +41,7 @@ padding: 20px;
 
 		<form th:object="${music}" th:action="@{/save}" action="#" method="post">
 		  	<label for="Artist">Artist</label>
-			<input type="text" id="Artist" th:field="*{Artist}" />
+			<input type="text" id="Artist" th:field="*{artist}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
 			
 		  	<label for="Song">Song</label>
@@ -55,7 +55,7 @@ padding: 20px;
 			
 		    <div style="clear: both; display: block; height: 10px;"></div>						
 		  	<label for="genre">Genre</label>
-			<select id="gere" th:field="*{genre}" class="form-control">
+			<select id="genre" th:field="*{genre}" class="form-control">
        		<option th:each="genre: ${genres}" th:value="${genre.genreId}" th:text="${genre.name}"></option>
     		</select>	
 							

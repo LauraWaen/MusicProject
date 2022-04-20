@@ -6,8 +6,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 
 @Entity
@@ -15,9 +18,17 @@ public class Music {
 	 @Id
 	 @GeneratedValue(strategy=GenerationType.AUTO)
 	 public Long musicId;
-	 public String Artist;
-	 public String Song;
-	 public int Year;
+	 @NotNull
+	 @Size(min=2, max=30)
+	 public String artist;
+	 
+	 @NotNull
+	 @Size(min=1, max=30)
+	 public String song;
+	 
+	 @NotNull
+	 public int year;
+	 
 	 
 	 @ManyToOne
 	   @JsonIgnoreProperties ("musics") 
@@ -26,43 +37,43 @@ public class Music {
 	 
 	 public Music() {}
 	 
-	 public Music(String Artist, String Song, int Year, Genre genre) {
+	 public Music(String artist, String song, int year, Genre genre) {
 		 super();
-		 this.Artist = Artist;
-		 this.Song = Song;
-		 this.Year = Year;
+		 this.artist = artist;
+		 this.song = song;
+		 this.year = year;
 		 this.genre = genre;
 	}
-	public Long getId() {
+	public Long getMusicId() {
 		return musicId;
 	}
 
-	public void setId(Long id) {
+	public void setMusicId(Long id) {
 		this.musicId = id;
 	}
 	
 	public String getArtist() {
-		return Artist;
+		return artist;
 	}
 
 	public void setArtist(String artist) {
-		Artist = artist;
+		this.artist = artist;
 	}
 	
 	public String getSong() {
-		return Song;
+		return song;
 	}
 
 	public void setSong(String song) {
-		Song = song;
+		this.song = song;
 	}
 	
 	public int getYear() {
-		return Year;
+		return year;
 	}
 	
 	public void setYear(int year) {
-		Year = year;
+		this.year = year;
 	}
 	
 	 
@@ -77,9 +88,9 @@ public class Music {
 	@Override
 	public String toString() {
 		if (this.genre != null)
-		return "Music [musicId=" + musicId + ", Artist=" + Artist + ", Song=" + Song + ", Year=" + Year + "Genre=" + this.getGenre() + "]";
+		return "Music [musicId=" + musicId + ", Artist=" + artist + ", Song=" + song + ", Year=" + year + "Genre=" + this.getGenre() + "]";
 		else 
-			return "Music [musicId=" + musicId + ", Artist=" + Artist + ", Song=" + Song + ", Year=" + Year + "]";
+			return "Music [musicId=" + musicId + ", Artist=" + artist + ", Song=" + song + ", Year=" + year + "]";
 			
 	 
 	 
