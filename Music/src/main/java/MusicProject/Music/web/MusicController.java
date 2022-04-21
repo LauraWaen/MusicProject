@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import MusicProject.Music.domain.GenreRepository;
-import MusicProject.Music.domain.Message;
 import MusicProject.Music.domain.Music;
 import MusicProject.Music.domain.MusicRepository;
 
@@ -87,7 +86,7 @@ public String addMusic(Model model){
 
 //Tallentaa uuden musiikin
 @RequestMapping(value = "/save", method = RequestMethod.POST)
-public String saveMusic(Music music){
+public String saveMusic(@Valid Music music, BindingResult bindingResult, Model model ){
   mrepository.save(music);
     return "redirect:/musiclist";
 }   

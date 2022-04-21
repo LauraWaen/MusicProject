@@ -20,12 +20,12 @@ import MusicProject.Music.domain.Music;
 			registry.addViewController("/results").setViewName("results");
 		}
 
-		@GetMapping("/")
+		@GetMapping("/result")
 		public String show(Music music) {
-			return "musicform";
+			return "result";
 		}
 
-		@PostMapping("/")
+		@PostMapping("/musicform")
 		public String checkPersonInfo(@Valid Music music, BindingResult bindingResult) {
 
 			if (bindingResult.hasErrors()) {
